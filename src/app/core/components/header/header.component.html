@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <div class="toolbar-container">
+    <span>Sobe</span>
+    <span>Rezervacije</span>
+    <span>Noćenja</span>
+    <span>Klijenti</span>
+    <button mat-flat-button
+            [matMenuTriggerFor]="configurationMenu">
+      <mat-icon>settings</mat-icon>
+      <span>Konfiguracija</span>
+    </button>
+  </div>
+</mat-toolbar>
+
+
+<mat-menu #configurationMenu="matMenu" >
+  <button mat-menu-item>
+    <mat-icon>bed</mat-icon>
+    <span>Kategorije kreveta soba</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>paid</mat-icon>
+    <span>Kategorije kavlitete soba</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>room_preferences</mat-icon>
+    <span>Kategorija soba</span>
+  </button>
+</mat-menu>

@@ -8,3 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'frontend';
 }
+
+//TODO: nauciti razliku izmedju shared i core:
+// Core - snigletoni, instancirani jednom pri pokretanju aplikacije
+// Shared - neovisni o ostatku aplikacije, za lazy loadanje
