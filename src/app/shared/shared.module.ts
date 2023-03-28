@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedRoutingModule } from './shared-routing.module';
-
-
 
 @NgModule({
   declarations: [],
@@ -10,8 +7,7 @@ import { SharedRoutingModule } from './shared-routing.module';
     CommonModule
   ],
   imports: [
-    CommonModule,
-    SharedRoutingModule
+    CommonModule
   ]
 })
 export class SharedModule { }

@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
 import { RoomsComponent } from './components/rooms/rooms.component';
-import {SharedModule} from "../../shared/shared.module";
-import {MatTableModule} from "@angular/material/table";
+import { SharedModule } from '../../shared/shared.module';
+import { MatTableModule } from '@angular/material/table';
+import { ClientsRoutingModule } from '../clients/clients-routing.module';
 
-const routes: Routes = [
-  {
-    path: 'rooms',
-    component: RoomsComponent
-  }
-];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-    SharedModule,
-    MatTableModule
-  ],
-  exports: [RouterModule],
-  declarations: [
-    RoomsComponent
-  ]
+    declarations: [
+        RoomsComponent,
+    ],
+    imports: [
+        SharedModule,
+        ClientsRoutingModule,
+        MatTableModule,
+    ],
 })
-export class RoomsModule { }
+export class RoomsModule {
+}
