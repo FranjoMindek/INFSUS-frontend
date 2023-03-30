@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './components/clients/clients.component';
-import {SharedModule} from "../../shared/shared.module";
+import { SharedModule } from '../../shared/shared.module';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
   declarations: [
-    ClientsComponent
+    ClientsComponent,
   ],
   imports: [
     SharedModule,
-    ClientsRoutingModule
+    ClientsRoutingModule,
+    MatTableModule,
   ],
 })
-export class ClientsModule { }
+export class ClientsModule {
+}

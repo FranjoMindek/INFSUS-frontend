@@ -1,13 +1,14 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpContext, HttpHeaders, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   get<T>(
     url: string,

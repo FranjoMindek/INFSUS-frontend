@@ -9,7 +9,8 @@ import { RoomsDetailed } from '../../../../data/types/RoomsDetailed';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent
+  implements OnInit {
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -18,7 +19,7 @@ export class RoomsComponent implements OnInit {
     'roomCode', 'roomFloor', 'statusName', 'roomCategoryPrice', 'roomBedCategoryName', 'roomQualityCategoryName',
   ];
   rooms$ = this.roomsService.getRoomsDetailed();
-  dataSource = new MatTableDataSource<RoomsDetailed>();
+  dataSource = new MatTableDataSource<RoomsDetailed>([]);
 
   constructor(private roomsService: RoomsService, private http: HttpClient) {
   }

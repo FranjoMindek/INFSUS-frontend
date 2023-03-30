@@ -4,15 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import {CoreModule} from "./core/core.module";
-import {RoomsModule} from "./features/rooms/rooms.module";
-import {ReservationsModule} from "./features/reservations/reservations.module";
-import {OvernightStaysModule} from "./features/overnight-stays/overnight-stays.module";
-import {HttpClientModule} from "@angular/common/http";
+import { CoreModule } from './core/core.module';
+import { RoomsModule } from './features/rooms/rooms.module';
+import { ReservationsModule } from './features/reservations/reservations.module';
+import { OvernightStaysModule } from './features/overnight-stays/overnight-stays.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ClientsModule } from './features/clients/clients.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,9 +24,11 @@ import {HttpClientModule} from "@angular/common/http";
     CoreModule,
     RoomsModule,
     ReservationsModule,
-    OvernightStaysModule
+    OvernightStaysModule,
+    ClientsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

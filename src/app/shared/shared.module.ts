@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [],
   exports: [
-    CommonModule
+    CommonModule,
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {
+}

@@ -1,11 +1,19 @@
 <mat-toolbar>
   <div class="toolbar-container">
-    <span>Sobe</span>
-    <span>Rezervacije</span>
-    <span>Noćenja</span>
-    <span>Klijenti</span>
-    <button mat-flat-button
-            [matMenuTriggerFor]="configurationMenu">
+    <a [routerLink]="['/rooms']">
+      Sobe
+    </a>
+    <a [routerLink]="['/reservations']">
+      Rezervacije
+    </a>
+    <a [routerLink]="['/overnight-stays']">
+      Noćenja
+    </a>
+    <a [routerLink]="['/clients']">
+      Klijenti
+    </a>
+    <button [matMenuTriggerFor]="configurationMenu"
+            mat-flat-button>
       <mat-icon>settings</mat-icon>
       <span>Konfiguracija</span>
     </button>
@@ -13,7 +21,7 @@
 </mat-toolbar>
 
 
-<mat-menu #configurationMenu="matMenu" >
+<mat-menu #configurationMenu="matMenu">
   <button mat-menu-item>
     <mat-icon>bed</mat-icon>
     <span>Kategorije kreveta soba</span>
