@@ -1,37 +1,48 @@
 <mat-toolbar>
   <div class="toolbar-container">
-    <a [routerLink]="['/rooms']">
-      Sobe
-    </a>
-    <a [routerLink]="['/reservations']">
-      Rezervacije
-    </a>
-    <a [routerLink]="['/overnight-stays']">
-      Noćenja
-    </a>
-    <a [routerLink]="['/clients']">
-      Klijenti
-    </a>
-    <button [matMenuTriggerFor]="configurationMenu"
-            mat-flat-button>
+
+    <button mat-flat-button [routerLink]="['/rooms']">
       <mat-icon>settings</mat-icon>
-      <span>Konfiguracija</span>
+      <span>Sobe</span>
     </button>
+
+    <button mat-flat-button [routerLink]="['/reservations']">
+      <mat-icon>settings</mat-icon>
+      <span>Rezervacije</span>
+    </button>
+
+    <button mat-flat-button [routerLink]="['/overnight-stays']">
+      <mat-icon>settings</mat-icon>
+      <span>Noćenja</span>
+    </button>
+
+    <button mat-flat-button [routerLink]="['/clients']">
+      <mat-icon>settings</mat-icon>
+      <span>Klijenti</span>
+    </button>
+
+    <app-auto-open-menu>
+      <button trigger
+              mat-flat-button>
+        <mat-icon>settings</mat-icon>
+        <span>Konfiguracija</span>
+      </button>
+      <div content>
+        <button mat-menu-item>
+          <mat-icon>bed</mat-icon>
+          <span>Kategorije kreveta soba</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>paid</mat-icon>
+          <span>Kategorije kavlitete soba</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>room_preferences</mat-icon>
+          <span>Kategorija soba</span>
+        </button>
+      </div>
+    </app-auto-open-menu>
+
   </div>
 </mat-toolbar>
 
-
-<mat-menu #configurationMenu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>bed</mat-icon>
-    <span>Kategorije kreveta soba</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>paid</mat-icon>
-    <span>Kategorije kavlitete soba</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>room_preferences</mat-icon>
-    <span>Kategorija soba</span>
-  </button>
-</mat-menu>

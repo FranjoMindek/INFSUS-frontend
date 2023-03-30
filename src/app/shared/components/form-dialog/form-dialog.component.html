@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{inputData.title}}</h1>
+<div mat-dialog-content>
+  <ng-container *ngFor="let column of inputData.columnsInfo" [ngSwitch]="column.type">
+    <mat-form-field *ngSwitchCase="formType.NUMBER"
+                    class="full-width">
+      <mat-label>{{column.name}}</mat-label>
+      <input matInput type="number" [(ngModel)]="returnData[column.name]">
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="formType.STRING"
+                    class="full-width">
+      <mat-label>{{column.name}}</mat-label>
+      <input matInput type="text" [(ngModel)]="returnData[column.name]">
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="formType.DATE"
+                    class="full-width">
+      <mat-label>{{column.name}}</mat-label>
+      <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="returnData[column.name]">
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Odustani</button>
+  <button mat-button [mat-dialog-close]="returnData" cdkFocusInitial>Spremi</button>
+</div>
