@@ -45,8 +45,9 @@ export class ApiService {
       responseType?: 'json';
       withCredentials?: boolean;
     }) {
-
-    return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, options);
+    if (options !== undefined)
+      return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body, options);
+    return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body);
   }
 
   put<T>(
@@ -65,8 +66,9 @@ export class ApiService {
       responseType?: 'json';
       withCredentials?: boolean;
     }) {
-
-    return this.http.put<T>(`${environment.BACKEND_API_URL}${url}`, options);
+    if (options)
+      return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body, options);
+    return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body);
   }
 
   delete<T>(

@@ -4,7 +4,8 @@ import { Reservation } from '../../../../data/types/Reservation';
 import { ReservationsService } from '../../../../data/services/reservations.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormDialogComponent } from '../../../../shared/components/form-dialog/form-dialog.component';
-import { FormDialogData, FormType } from '../../../../data/types/FormDialogData';
+import { FormActions, FormDialogData, FormType } from '../../../../data/types/FormDialogData';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reservations',
@@ -14,36 +15,44 @@ import { FormDialogData, FormType } from '../../../../data/types/FormDialogData'
 export class ReservationsComponent
   implements OnInit {
 
-  columnsInfo = [
-    {
-      name: 'reservationId',
-      type: FormType.NUMBER,
-    },
-    {
-      name: 'clientId',
-      type: FormType.NUMBER,
-    },
-    {
-      name: 'roomId',
-      type: FormType.NUMBER,
-    },
-    {
-      name: 'reservationDateFrom',
-      type: FormType.DATE,
-    },
-    {
-      name: 'reservationDateTo',
-      type: FormType.DATE,
-    },
-    {
-      name: 'reservationStatusId',
-      type: FormType.NUMBER,
-    },
+  displayedColumns = [
+    'reservationId',
+    'clientId',
+    'roomId',
+    'reservationDateFrom',
+    'reservationDateTo',
+    'reservationStatusId',
   ];
-  columnNames = this.columnsInfo.map(col => col.name);
-
+  displayedColumnsWithActions = [...this.displayedColumns, 'actions'];
+  actions = [
+    FormActions.INSERT,
+    FormActions.UPDATE,
+    FormActions.DELETE,
+  ];
+  formActions = FormActions;
   reservations$ = this.reservationsService.getReservations();
   dataSource = new MatTableDataSource<Reservation>([]);
+
+  newEntityForm: FormDialogData = {
+    title: 'Unesi novu rezervaciju',
+    formInfo: [
+      {
+        name: 'clientId',
+        type: FormType.NUMBER,
+        validators: [Validators.required],
+      },
+      {
+        name: 'roomId',
+        type: FormType.NUMBER,
+        validators: [Validators.required],
+      },
+      {
+        name: 'reservationDateRange',
+        type: FormType.DATE_RANGE,
+        validators: [Validators.required],
+      },
+    ],
+  };
 
   constructor(
     private reservationsService: ReservationsService,
@@ -60,10 +69,7 @@ export class ReservationsComponent
     const dialogRef = this.dialog.open<FormDialogComponent, FormDialogData, any>(
       FormDialogComponent,
       {
-        data: {
-          title: 'Unesi novu rezervaciju',
-          columnsInfo: this.columnsInfo,
-        },
+        data: this.newEntityForm,
         maxWidth: '400px',
       },
     );

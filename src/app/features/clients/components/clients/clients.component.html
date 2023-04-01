@@ -1,11 +1,47 @@
-<table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+<div>
+  <div class="actions-header">
+    <button mat-raised-button
+            (click)="onInsertEntity()"
+            *ngIf="this.actions.includes(formActions.INSERT)">
+      Dodaj novog klijenta
+    </button>
+  </div>
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
-  <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
-    <th *matHeaderCellDef mat-header-cell> {{column}} </th>
-    <td *matCellDef="let element" mat-cell> {{element[column]}} </td>
-  </ng-container>
+    <ng-container *ngFor="let name of displayedColumns" matColumnDef="{{name}}">
+      <th mat-header-cell
+          *matHeaderCellDef>
+        {{name}}
+      </th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element[name]}}
+      </td>
+    </ng-container>
 
-  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-</table>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell
+          *matHeaderCellDef>
+        Actions
+      </th>
+      <td mat-cell
+          *matCellDef="let element">
+        <button mat-mini-fab
+                color="primary"
+                *ngIf="this.actions.includes(formActions.UPDATE)">
+          <mat-icon>settings</mat-icon>
+        </button>&nbsp;
+        <button mat-mini-fab
+                color="primary"
+                *ngIf="this.actions.includes(formActions.DELETE)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumnsWithActions"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumnsWithActions;"></tr>
+  </table>
+</div>

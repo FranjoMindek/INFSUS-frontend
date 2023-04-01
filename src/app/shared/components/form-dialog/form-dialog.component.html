@@ -1,29 +1,66 @@
 <h1 mat-dialog-title>{{inputData.title}}</h1>
 <div mat-dialog-content>
-  <ng-container *ngFor="let column of inputData.columnsInfo" [ngSwitch]="column.type">
-    <mat-form-field *ngSwitchCase="formType.NUMBER"
-                    class="full-width">
-      <mat-label>{{column.name}}</mat-label>
-      <input matInput type="number" [(ngModel)]="returnData[column.name]">
-    </mat-form-field>
+  <form [formGroup]="dialogForm">
+    <div formArrayName="formArray">
+      <ng-container *ngFor="let column of inputData.formInfo; let i = index" [ngSwitch]="column.type">
+        <mat-form-field *ngSwitchCase="formType.NUMBER"
+                        class="full-width">
+          <mat-label>{{column.name}}</mat-label>
+          <input matInput
+                 type="number"
+                 [formControlName]="this.controlIndex[i]">
+          <mat-error *ngIf="this.formArray.controls[this.controlIndex[i]].hasError('required')">
+            Ovo polje je obavezno
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field *ngSwitchCase="formType.STRING"
-                    class="full-width">
-      <mat-label>{{column.name}}</mat-label>
-      <input matInput type="text" [(ngModel)]="returnData[column.name]">
-    </mat-form-field>
+        <mat-form-field *ngSwitchCase="formType.STRING"
+                        class="full-width">
+          <mat-label>{{column.name}}</mat-label>
+          <input matInput
+                 type="text"
+                 [formControlName]="this.controlIndex[i]">
+          <mat-error *ngIf="this.formArray.controls[this.controlIndex[i]].hasError('required')">
+            Ovo polje je obavezno
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field *ngSwitchCase="formType.DATE"
-                    class="full-width">
-      <mat-label>{{column.name}}</mat-label>
-      <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="returnData[column.name]">
-      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #myDatepicker></mat-datepicker>
-    </mat-form-field>
+        <mat-form-field *ngSwitchCase="formType.DATE"
+                        class="full-width">
+          <mat-label>{{column.name}}</mat-label>
+          <input matInput
+                 [matDatepicker]="datePicker"
+                 [formControlName]="this.controlIndex[i]">
+          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+          <mat-error *ngIf="this.formArray.controls[this.controlIndex[i]].hasError('required')">
+            Ovo polje je obavezno
+          </mat-error>
+        </mat-form-field>
 
-  </ng-container>
+        <mat-form-field *ngSwitchCase="formType.DATE_RANGE"
+                        class="full-width">
+          <mat-label>{{column.name}}</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker"
+          >
+            <input matStartDate placeholder="Start date"
+                   [formControlName]="this.controlIndex[i]">
+            <input matEndDate placeholder="End date"
+                   [formControlName]="this.controlIndex[i]-1">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker></mat-date-range-picker>
+          <mat-error *ngIf="this.formArray.controls[this.controlIndex[i]].hasError('required') ||
+                            this.formArray.controls[this.controlIndex[i]-1].hasError('required')">
+            Ovo polje je obavezno
+          </mat-error>
+        </mat-form-field>
+
+      </ng-container>
+    </div>
+  </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Odustani</button>
-  <button mat-button [mat-dialog-close]="returnData" cdkFocusInitial>Spremi</button>
+  <button mat-button (click)="onSubmitClick()" cdkFocusInitial>Spremi</button>
 </div>

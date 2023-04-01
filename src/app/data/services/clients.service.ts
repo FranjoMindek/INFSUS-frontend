@@ -18,6 +18,10 @@ export class ClientsService {
     return this.api.get<Client>(`/clients/${clientId}`);
   }
 
+  insertClient(client: Client) {
+    return this.api.post(`/clients`, client);
+  }
+
   updateClient(client: Client) {
     return this.api.put(`/clients/${client.clientId}`, client);
   }

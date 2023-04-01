@@ -1,14 +1,25 @@
+import { ValidatorFn } from '@angular/forms';
+
 export /*const*/ enum FormType {
   STRING,
   NUMBER,
-  DATE
+  DATE,
+  DATE_RANGE,
+  CURRENCY
+}
+
+export enum FormActions {
+  INSERT,
+  UPDATE,
+  DELETE
 }
 
 export type FormDialogData = {
   title: string,
-  columnsInfo: {
+  formInfo: {
     name: string,
     type: FormType,
-    value?: any
+    value?: any,
+    validators?: ValidatorFn[],
   }[],
 }
