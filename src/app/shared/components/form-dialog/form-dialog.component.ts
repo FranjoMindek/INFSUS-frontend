@@ -2,6 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataType, FormDialogData } from '../../../data/types/FormDialogData';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CodebooksService } from '../../../data/services/codebooks.service';
+import { Observable } from 'rxjs';
+import { Codebooks } from '../../../data/types/Codebook';
 
 
 @Component({
@@ -13,16 +16,18 @@ export class FormDialogComponent {
   formType = DataType;
   dialogForm: FormGroup;
   controlIndex: number[];
+  codebooks$: Observable<Codebooks> = this.codebookService.getCodebooks();
 
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public inputData: FormDialogData,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private codebookService: CodebooksService,
+  ) {
+    this.controlIndex = [];
     this.dialogForm = this.formBuilder.group({
       formArray: this.formBuilder.array([]),
     });
-    console.log(inputData);
-    this.controlIndex = [];
     for (let i = 0; i < this.inputData.formInfo.length; i++) {
       const column = this.inputData.formInfo[i];
       let newValidators = [...(column.validators || [])];
@@ -61,8 +66,17 @@ export class FormDialogComponent {
     for (let i = 0; i < this.inputData.formInfo.length; i++) {
       const column = this.inputData.formInfo[i];
       if (column.type === DataType.DATE_RANGE) {
-        returnData[column.from!] = values[this.controlIndex[i]]._d;
-        returnData[column.to!] = values[this.controlIndex[i] - 1]._d;
+        let valueFrom = values[this.controlIndex[i]];
+        let valueTo = values[this.controlIndex[i] - 1];
+        // if (typeof valueFrom === 'object') {
+        //   console.log(valueFrom._d);
+        //   valueFrom = valueFrom._d.toISOString();
+        // }
+        // if (typeof valueTo === 'object') {
+        //   valueTo = valueTo._d;
+        // }
+        returnData[column.from!] = valueFrom;
+        returnData[column.to!] = valueTo;
       } else {
         returnData[column.name] = values[this.controlIndex[i]];
       }

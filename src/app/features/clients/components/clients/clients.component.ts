@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormDialogComponent } from '../../../../shared/components/form-dialog/form-dialog.component';
 import { filter, switchMap } from 'rxjs';
 import { isNotUndefined } from '../../../../core/utilities/isNotUndefined';
+import { CodebooksService } from '../../../../data/services/codebooks.service';
 
 @Component({
   selector: 'app-clients',
@@ -46,10 +47,16 @@ export class ClientsComponent {
 
   constructor(
     private clientService: ClientsService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    public codebooksService: CodebooksService,
+  ) {
     this.reservations$.subscribe(clients => {
       this.dataSource.data = clients;
     });
+    this.codebooksService.getCodebooks()
+        .subscribe(codebooks =>
+          console.log(codebooks),
+        );
   }
 
   onUpdateEntity(client: Client): void {

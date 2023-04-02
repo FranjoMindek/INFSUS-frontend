@@ -112,19 +112,26 @@ export class ReservationsComponent {
       title: `Uredi rezervaciju s ID-jem ${reservation.reservationId}`,
       formInfo: [
         {
-          value: reservation.roomId,
           name: 'roomId',
           type: DataType.NUMBER,
+          value: reservation.roomId,
           validators: [Validators.required],
         },
         {
           name: 'reservationDateRange',
-          type: DataType.DATE_RANGE,
-          validators: [Validators.required],
           from: 'reservationDateFrom',
           to: 'reservationDateTo',
+          type: DataType.DATE_RANGE,
           valueFrom: reservation.reservationDateFrom,
           valueTo: reservation.reservationDateTo,
+          validators: [Validators.required],
+        },
+        {
+          name: 'reservationStatusId',
+          type: DataType.CODEBOOK,
+          codebookName: 'reservationStatuses',
+          value: reservation.reservationStatusId,
+          validators: [Validators.required],
         },
       ],
     };

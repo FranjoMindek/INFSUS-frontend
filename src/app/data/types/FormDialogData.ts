@@ -6,7 +6,8 @@ export /*const*/ enum DataType {
   DATE,
   DATE_RANGE,
   CURRENCY,
-  ACTIONS
+  ACTIONS,
+  CODEBOOK
 }
 
 export enum FormActions {
@@ -26,6 +27,7 @@ export type FormDialogData = {
       from?: string,
       to?: string,
       valueFrom?: Date,
-      valueTo?: Date
+      valueTo?: Date,
+      codebookName?: string,
     }[]
 }
