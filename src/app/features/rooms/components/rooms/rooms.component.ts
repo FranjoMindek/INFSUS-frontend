@@ -1,33 +1,69 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RoomsService } from '../../../../data/services/rooms.service';
-import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { RoomsDetailed } from '../../../../data/types/RoomsDetailed';
+import { DataType, FormActions } from '../../../../data/types/FormDialogData';
+import { Reservation } from '../../../../data/types/Reservation';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
-export class RoomsComponent
-  implements OnInit {
+export class RoomsComponent {
 
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  // @ViewChild(MatSort, { static: true }) sort: MatSort;
+  tableInfo = {
+    roomId: {
+      type: DataType.NUMBER,
+      name: 'ID sobe',
+    },
+    roomCode: {
+      type: DataType.STRING,
+      name: 'Kod sobe',
+    },
+    roomFloor: {
+      type: DataType.NUMBER,
+      name: 'Kat sobe',
+    },
+    statusName: {
+      type: DataType.STRING,
+      name: 'Stanje sobe',
+    },
+    roomCategoryPrice: {
+      type: DataType.CURRENCY,
+      name: 'Cijena sobe',
+    },
+    roomBedCategoryName: {
+      type: DataType.STRING,
+      name: 'Kreveti',
+    },
+    roomQualityCategoryName: {
+      type: DataType.STRING,
+      name: 'Kategorija',
+    },
+  };
+  tableKeys = Object.keys(this.tableInfo);
+  dataType = DataType;
+  formActions = FormActions;
 
-  displayedColumns = [
-    'roomId', 'roomCode', 'roomFloor', 'statusName', 'roomCategoryPrice', 'roomBedCategoryName',
-    'roomQualityCategoryName',
-  ];
-  rooms$ = this.roomsService.getRoomsDetailed();
+  rooms$ = this.roomService.getRoomsDetailed();
   dataSource = new MatTableDataSource<RoomsDetailed>([]);
 
-  constructor(private roomsService: RoomsService, private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
+  constructor(
+    private roomService: RoomsService,
+    public dialog: MatDialog) {
     this.rooms$.subscribe(rooms => {
       this.dataSource.data = rooms;
     });
+  }
+
+  onInsertEntity(): void {
+  }
+
+  onUpdateEntity(reservation: Reservation): void {
+  }
+
+  onDeleteEntity(reservation: Reservation): void {
   }
 }

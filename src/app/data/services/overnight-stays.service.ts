@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/ApiService';
-import { OvernightStay } from '../types/OvernightStay';
+import { OvernightStay, OvernightStayDTO } from '../types/OvernightStay';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class OvernightStaysService {
     return this.api.get<OvernightStay>(`/overnight-stays/${overnightStayId}`);
   }
 
-  insertOvernightStays(overnightStay: OvernightStay) {
+  insertOvernightStays(overnightStay: OvernightStayDTO) {
     return this.api.post(`/overnight-stays`, overnightStay);
   }
 

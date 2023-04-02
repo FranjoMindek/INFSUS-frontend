@@ -1,9 +1,9 @@
 <div>
   <div class="actions-header">
     <button mat-raised-button
-            (click)="onInsertEntity()"
+            (click)="onInsertEntity.emit()"
             *ngIf="this.tableInfo.actions.values.includes(formActions.INSERT)">
-      Dodaj novo nocenje
+      {{title}}
     </button>
   </div>
   <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
@@ -26,13 +26,13 @@
             <button mat-mini-fab
                     color="primary"
                     *ngIf="this.tableInfo.actions.values.includes(formActions.UPDATE)"
-                    (click)="onUpdateEntity(element)">
+                    (click)="onUpdateEntity.emit(element)">
               <mat-icon>settings</mat-icon>
             </button>&nbsp;
             <button mat-mini-fab
                     color="primary"
                     *ngIf="this.tableInfo.actions.values.includes(formActions.DELETE)"
-                    (click)="onDeleteEntity(element)">
+                    (click)="onDeleteEntity.emit(element)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

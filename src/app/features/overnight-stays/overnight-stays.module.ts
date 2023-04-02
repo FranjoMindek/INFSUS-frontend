@@ -3,6 +3,7 @@ import { OvernightStaysComponent } from './components/overnight-stays/overnight-
 import { SharedModule } from '../../shared/shared.module';
 import { OvernightStaysRoutingModule } from './overnight-stays-routing.module';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
     SharedModule,
     OvernightStaysRoutingModule,
     MatTableModule,
+    MatIconModule,
   ],
 })
 export class OvernightStaysModule {

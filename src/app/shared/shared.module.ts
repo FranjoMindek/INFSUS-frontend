@@ -17,6 +17,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     AutoOpenMenuComponent,
     FormDialogComponent,
     ConfirmDialogComponent,
+    // MyTableComponent,
   ],
   exports: [
     CommonModule,
