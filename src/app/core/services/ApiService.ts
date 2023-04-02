@@ -67,8 +67,8 @@ export class ApiService {
       withCredentials?: boolean;
     }) {
     if (options)
-      return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body, options);
-    return this.http.post<T>(`${environment.BACKEND_API_URL}${url}`, body);
+      return this.http.put<T>(`${environment.BACKEND_API_URL}${url}`, body, options);
+    return this.http.put<T>(`${environment.BACKEND_API_URL}${url}`, body);
   }
 
   delete<T>(

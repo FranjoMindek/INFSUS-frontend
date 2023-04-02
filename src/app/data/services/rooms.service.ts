@@ -19,6 +19,10 @@ export class RoomsService {
     return this.api.get<RoomsDetailed>(`/rooms/${roomId}`);
   }
 
+  insertRoom(room: Room) {
+    return this.api.post(`/rooms`, room);
+  }
+
   updateRoom(room: Room) {
     return this.api.put(`/rooms/${room.roomId}`, room);
   }

@@ -28,12 +28,14 @@
           *matCellDef="let element">
         <button mat-mini-fab
                 color="primary"
-                *ngIf="this.actions.includes(formActions.UPDATE)">
+                *ngIf="this.actions.includes(formActions.UPDATE)"
+                (click)="onUpdateEntity(element)">
           <mat-icon>settings</mat-icon>
         </button>&nbsp;
         <button mat-mini-fab
                 color="primary"
-                *ngIf="this.actions.includes(formActions.DELETE)">
+                *ngIf="this.actions.includes(formActions.DELETE)"
+                (click)="onDeleteEntity(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

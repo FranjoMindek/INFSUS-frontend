@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormDialogData, FormType } from '../../../data/types/FormDialogData';
+import { DataType, FormDialogData } from '../../../data/types/FormDialogData';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
@@ -10,7 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./form-dialog.component.css'],
 })
 export class FormDialogComponent {
-  formType = FormType;
+  formType = DataType;
   dialogForm: FormGroup;
   controlIndex: number[];
 
@@ -21,6 +21,7 @@ export class FormDialogComponent {
     this.dialogForm = this.formBuilder.group({
       formArray: this.formBuilder.array([]),
     });
+    console.log(inputData);
     this.controlIndex = [];
     for (let i = 0; i < this.inputData.formInfo.length; i++) {
       const column = this.inputData.formInfo[i];
@@ -30,9 +31,9 @@ export class FormDialogComponent {
       } else {
         this.controlIndex[i] = this.controlIndex[i - 1] + 1;
       }
-      if (column.type === FormType.DATE_RANGE) {
-        this.formArray.push(new FormControl(column.value, newValidators));
-        this.formArray.push(new FormControl(column.value, newValidators));
+      if (column.type === DataType.DATE_RANGE) {
+        this.formArray.push(new FormControl(column.valueTo!, newValidators));
+        this.formArray.push(new FormControl(column.valueFrom!, newValidators));
         this.controlIndex[i] += 1;
       } else {
         this.formArray.push(new FormControl(column.value, newValidators));
@@ -59,11 +60,9 @@ export class FormDialogComponent {
     const values = this.formArray.value as any[];
     for (let i = 0; i < this.inputData.formInfo.length; i++) {
       const column = this.inputData.formInfo[i];
-      if (column.type === FormType.DATE_RANGE) {
-        returnData[column.name] = {
-          start: values[this.controlIndex[i]],
-          end: values[this.controlIndex[i] - 1],
-        };
+      if (column.type === DataType.DATE_RANGE) {
+        returnData[column.from!] = values[this.controlIndex[i]]._d;
+        returnData[column.to!] = values[this.controlIndex[i] - 1]._d;
       } else {
         returnData[column.name] = values[this.controlIndex[i]];
       }

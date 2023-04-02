@@ -18,6 +18,11 @@ export class OvernightStaysService {
     return this.api.get<OvernightStay>(`/overnight-stays/${overnightStayId}`);
   }
 
+  insertOvernightStays(overnightStay: OvernightStay) {
+    return this.api.post(`/overnight-stays`, overnightStay);
+  }
+
+
   updateOvernightStay(overnightStay: OvernightStay) {
     return this.api.put(`/overnight-stays/${overnightStay.overnightStayId}`, overnightStay);
   }

@@ -29,9 +29,9 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.mat-column-actions {
-  width: min-content;
-}
+/*.mat-column-actions {*/
+/*  width: min-content;*/
+/*}*/
 
 .actions-header {
   display: flex;

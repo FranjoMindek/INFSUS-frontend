@@ -10,11 +10,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AutoOpenMenuComponent,
     FormDialogComponent,
+    ConfirmDialogComponent,
   ],
   exports: [
     CommonModule,

@@ -1,11 +1,12 @@
 import { ValidatorFn } from '@angular/forms';
 
-export /*const*/ enum FormType {
+export /*const*/ enum DataType {
   STRING,
   NUMBER,
   DATE,
   DATE_RANGE,
-  CURRENCY
+  CURRENCY,
+  ACTIONS
 }
 
 export enum FormActions {
@@ -16,10 +17,15 @@ export enum FormActions {
 
 export type FormDialogData = {
   title: string,
-  formInfo: {
-    name: string,
-    type: FormType,
-    value?: any,
-    validators?: ValidatorFn[],
-  }[],
+  formInfo:
+    {
+      name: string,
+      type: Omit<DataType, DataType.DATE_RANGE>,
+      value?: any,
+      validators?: ValidatorFn[],
+      from?: string,
+      to?: string,
+      valueFrom?: Date,
+      valueTo?: Date
+    }[]
 }

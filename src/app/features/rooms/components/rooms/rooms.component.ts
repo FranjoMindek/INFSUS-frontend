@@ -16,7 +16,8 @@ export class RoomsComponent
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displayedColumns = [
-    'roomCode', 'roomFloor', 'statusName', 'roomCategoryPrice', 'roomBedCategoryName', 'roomQualityCategoryName',
+    'roomId', 'roomCode', 'roomFloor', 'statusName', 'roomCategoryPrice', 'roomBedCategoryName',
+    'roomQualityCategoryName',
   ];
   rooms$ = this.roomsService.getRoomsDetailed();
   dataSource = new MatTableDataSource<RoomsDetailed>([]);

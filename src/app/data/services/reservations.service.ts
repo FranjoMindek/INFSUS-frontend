@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/ApiService';
-import { Reservation } from '../types/Reservation';
+import { Reservation, ReservationDTO } from '../types/Reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,10 @@ export class ReservationsService {
 
   getReservationById(reservationId: number | string) {
     return this.api.get<Reservation>(`/reservations/${reservationId}`);
+  }
+
+  insertReservations(reservation: ReservationDTO) {
+    return this.api.post(`/reservations`, reservation);
   }
 
   updateReservation(reservation: Reservation) {
