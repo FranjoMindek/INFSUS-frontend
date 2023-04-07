@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Uredi nocenje s ID-jem {{inputData.overnightStayId}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" *ngIf="codebooks$ | async as codebooks">
+    <mat-form-field class="full-width">
+      <mat-label>Soba</mat-label>
+      <mat-select formControlName="roomId">
+        <ng-container *ngIf="codebooks$ | async as codebooks">
+          <mat-option *ngFor="let room of codebooks['rooms']"
+                      [value]="room.id">
+            {{room.name}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Datum nocenja</mat-label>
+      <mat-date-range-picker #overnightStayDateRange></mat-date-range-picker>
+      <mat-date-range-input [rangePicker]="overnightStayDateRange">
+        <input matStartDate
+               formControlName="overnightStayDateFrom">
+        <input matEndDate
+               formControlName="overnightStayDateTo">
+      </mat-date-range-input>
+      <mat-datepicker-toggle [for]="overnightStayDateRange" matSuffix></mat-datepicker-toggle>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="overnightStayStatusId">
+        <ng-container>
+          <mat-option *ngFor="let status of codebooks['overnightStayStatuses']"
+                      [value]="status.id">
+            {{status.name}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onCancel()" mat-button>Odustani</button>
+  <button (click)="onConfirm()" cdkFocusInitial mat-button>Spremi</button>
+</div>

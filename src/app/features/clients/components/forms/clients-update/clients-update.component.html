@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Uredi klijenta s OIB-om {{inputData.clientNationalId}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+
+    <mat-form-field class="full-width">
+      <mat-label>Ime klijenta</mat-label>
+      <input matInput
+             type="text"
+             formControlName="clientFirstName">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Prezime klijenta</mat-label>
+      <input matInput
+             type="text"
+             formControlName="clientLastName">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Mobilni broj klijenta</mat-label>
+      <input matInput
+             type="text"
+             formControlName="clientPhoneNumber">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onCancel()" mat-button>Odustani</button>
+  <button (click)="onConfirm()" cdkFocusInitial mat-button>Spremi</button>
+</div>
