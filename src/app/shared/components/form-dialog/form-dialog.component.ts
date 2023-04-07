@@ -3,8 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataType, FormDialogData } from '../../../data/types/FormDialogData';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CodebooksService } from '../../../data/services/codebooks.service';
-import { Observable } from 'rxjs';
-import { Codebooks } from '../../../data/types/Codebook';
 
 
 @Component({
@@ -16,7 +14,8 @@ export class FormDialogComponent {
   formType = DataType;
   dialogForm: FormGroup;
   controlIndex: number[];
-  codebooks$: Observable<Codebooks> = this.codebookService.getCodebooks();
+
+  // codebooks$: Observable<Codebooks> = this.codebookService.getCodebooks();
 
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
@@ -46,15 +45,6 @@ export class FormDialogComponent {
     }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  onSubmitClick(): void {
-    if (this.dialogForm.valid)
-      this.dialogRef.close(this.prepareData);
-  }
-
   get formArray() {
     return this.dialogForm.get('formArray') as FormArray;
   }
@@ -82,5 +72,14 @@ export class FormDialogComponent {
       }
     }
     return returnData;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmitClick(): void {
+    if (this.dialogForm.valid)
+      this.dialogRef.close(this.prepareData);
   }
 }

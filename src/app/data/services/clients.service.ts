@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/ApiService';
-import { Client } from '../types/Client';
+import { Client, ClientUpdate } from '../types/Client';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +18,15 @@ export class ClientsService {
     return this.api.get<Client>(`/clients/${clientId}`);
   }
 
+  getClientByNationalId(clientNationalId: string) {
+    return this.api.get<Client>(`/clients/`, {params: {clientNationalId}});
+  }
+
   insertClient(client: Client) {
     return this.api.post(`/clients`, client);
   }
 
-  updateClient(client: Client) {
+  updateClient(client: ClientUpdate) {
     return this.api.put(`/clients/${client.clientId}`, client);
   }
 

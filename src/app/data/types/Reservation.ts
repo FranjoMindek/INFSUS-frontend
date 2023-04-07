@@ -7,9 +7,20 @@ export type Reservation = {
   reservationStatusId?: number
 }
 
-export type ReservationDTO = {
+export type ReservationUpdate = {
   clientId: number,
   roomId: number,
   reservationDateFrom: Date,
   reservationDateTo: Date
 }
+
+export type ReservationInsert = {
+  clientNationalId: string,
+  clientFirstName: string,
+  clientLastName: string,
+  clientPhoneNumber: number,
+  roomId: number,
+  reservationDateFrom: Date,
+  reservationDateTo: Date,
+}
+

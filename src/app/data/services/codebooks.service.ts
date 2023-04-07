@@ -1,44 +1,62 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, tap } from 'rxjs';
-import { Codebook, Codebooks } from '../types/Codebook';
+import { combineLatestWith, from, map, Observable, startWith, tap } from 'rxjs';
+import { CodebookNames, Codebooks } from '../types/Codebooks';
 import { ApiService } from '../../core/services/ApiService';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CodebooksService {
-
-  private codebooks$: {[index: string]: ReplaySubject<Codebook[]>} = {};
+  private cachedCodebooks: Codebooks = {};
 
   constructor(
     private api: ApiService,
-  ) {
-  }
+  ) { }
 
-  public getCodebooks(...codebookNames: string[]): [{[p: string]: Observable<Codebook[]>}, Observable<Codebooks> | null] {
+  public getCodebooks(codebookName: CodebookNames, ...codebookNames: CodebookNames[]): Observable<Codebooks>
+  public getCodebooks(...codebookNames: CodebookNames[]): Observable<Codebooks> {
 
-    const codebookNamesHere = codebookNames.filter(codebookName => this.codebooks$[codebookName]);
-    const codebookNamesToFetch = codebookNames.filter(codebookName => !this.codebooks$[codebookName]);
+    const codebookNamesHere = codebookNames.filter(codebookName => this.cachedCodebooks[codebookName]) as string[];
+    const codebookNamesToFetch = codebookNames.filter(codebookName => !this.cachedCodebooks[codebookName]) as string[];
 
-    const codebooksHere: {[index: string]: Observable<Codebook[]>} = {};
-    codebookNamesHere.forEach(name => codebooksHere[name] = this.codebooks$[name].asObservable());
-
-    if (codebookNamesToFetch.length > 0) {
-      const fetching = this.api.get<Codebooks>(`/codebooks/${codebookNamesToFetch}`)
-                           .pipe(
-                             tap(codebooks => {
-                               Object.keys(codebooks)
-                                     .forEach(name => {
-                                       const subject = new ReplaySubject<Codebook[]>(1);
-                                       subject.next(codebooks[name]);
-                                       this.codebooks$[name] = subject;
-                                     });
-                             }),
-                           );
-
-      return [codebooksHere, fetching];
+    let codebooksHere$: Observable<Codebooks>;
+    if (codebookNamesHere.length > 0) {
+      codebooksHere$ = from([this.cachedCodebooks])
+        .pipe(
+          map(codebooks =>
+            Object.keys(codebooks)
+                  .filter(key => codebookNamesHere.includes(key))
+                  .reduce((obj, key) => {
+                    return {
+                      ...obj,
+                      [key]: codebooks[key],
+                    };
+                  }, {}) as Codebooks,
+          ),
+        );
     }
 
-    return [codebooksHere, null];
+    let codebooksFetching$: Observable<Codebooks>;
+    if (codebookNamesToFetch.length > 0) {
+      codebooksFetching$ = this.api.get<Codebooks>(`/codebooks/${codebookNamesToFetch}`)
+                               .pipe(
+                                 tap(codebooks => {
+                                   this.cachedCodebooks = Object.assign(this.cachedCodebooks, codebooks);
+                                 }),
+                                 startWith({}),
+                               );
+    }
+
+
+    if (codebookNamesHere.length > 0 && codebookNamesToFetch.length > 0) {
+      return codebooksHere$!.pipe(
+        combineLatestWith(codebooksFetching$!),
+        map((test: [Codebooks, Codebooks]) => Object.assign(test[0], test[1])),
+      );
+    } else if (codebookNamesHere.length > 0) {
+      return codebooksHere$!;
+    } else {
+      return codebooksFetching$!;
+    }
   }
 }

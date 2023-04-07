@@ -1,54 +1,54 @@
 <div>
   <div class="actions-header">
-    <button mat-raised-button
-            (click)="onInsertEntity.emit()"
-            *ngIf="this.tableInfo.actions.values.includes(formActions.INSERT)">
+    <button (click)="onInsertEntity.emit()"
+            *ngIf="this.tableInfo.actions.values.includes(formActions.INSERT)"
+            mat-raised-button>
       {{title}}
     </button>
   </div>
   <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
     <ng-container *ngFor="let entry of tableInfo | keyvalue" matColumnDef="{{entry.key}}">
-      <th mat-header-cell
-          *matHeaderCellDef>
+      <th *matHeaderCellDef
+          mat-header-cell>
         {{entry.value.name}}
       </th>
       <ng-container [ngSwitch]="entry.value.type">
         <ng-container *ngSwitchCase="dataType.DATE">
-          <td mat-cell
-              *matCellDef="let element">
+          <td *matCellDef="let element"
+              mat-cell>
             {{element[entry.key] | date}}
           </td>
         </ng-container>
         <ng-container *ngSwitchCase="dataType.ACTIONS">
-          <td mat-cell
-              *matCellDef="let element">
-            <button mat-mini-fab
-                    color="primary"
+          <td *matCellDef="let element"
+              mat-cell>
+            <button (click)="onUpdateEntity.emit(element)"
                     *ngIf="this.tableInfo.actions.values.includes(formActions.UPDATE)"
-                    (click)="onUpdateEntity.emit(element)">
+                    color="primary"
+                    mat-mini-fab>
               <mat-icon>settings</mat-icon>
             </button>&nbsp;
-            <button mat-mini-fab
-                    color="primary"
+            <button (click)="onDeleteEntity.emit(element)"
                     *ngIf="this.tableInfo.actions.values.includes(formActions.DELETE)"
-                    (click)="onDeleteEntity.emit(element)">
+                    color="primary"
+                    mat-mini-fab>
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>
         <ng-container *ngSwitchDefault>
-          <td mat-cell
-              *matCellDef="let element">
+          <td *matCellDef="let element"
+              mat-cell>
             {{element[entry.key]}}
           </td>
         </ng-container>
       </ng-container>
     </ng-container>
 
-    <tr mat-header-row
-        *matHeaderRowDef="tableKeys"></tr>
-    <tr mat-row
-        *matRowDef="let row; columns: tableKeys;"></tr>
+    <tr *matHeaderRowDef="tableKeys"
+        mat-header-row></tr>
+    <tr *matRowDef="let row; columns: tableKeys;"
+        mat-row></tr>
   </table>
 </div>

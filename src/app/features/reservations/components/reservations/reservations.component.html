@@ -1,54 +1,71 @@
 <div>
   <div class="actions-header">
     <button mat-raised-button
-            (click)="onInsertEntity()"
-            *ngIf="this.tableInfo.actions.values.includes(formActions.INSERT)">
+            (click)="onInsertEntity()">
       Dodaj novu rezervaciju
     </button>
   </div>
-  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
-    <ng-container *ngFor="let entry of tableInfo | keyvalue" matColumnDef="{{entry.key}}">
-      <th mat-header-cell
-          *matHeaderCellDef>
-        {{entry.value.name}}
-      </th>
-      <ng-container [ngSwitch]="entry.value.type">
-        <ng-container *ngSwitchCase="dataType.DATE">
-          <td mat-cell
-              *matCellDef="let element">
-            {{element[entry.key] | date}}
-          </td>
-        </ng-container>
-        <ng-container *ngSwitchCase="dataType.ACTIONS">
-          <td mat-cell
-              *matCellDef="let element">
-            <button mat-mini-fab
-                    color="primary"
-                    *ngIf="this.tableInfo.actions.values.includes(formActions.UPDATE)"
-                    (click)="onUpdateEntity(element)">
-              <mat-icon>settings</mat-icon>
-            </button>&nbsp;
-            <button mat-mini-fab
-                    color="primary"
-                    *ngIf="this.tableInfo.actions.values.includes(formActions.DELETE)"
-                    (click)="onDeleteEntity(element)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container *ngSwitchDefault>
-          <td mat-cell
-              *matCellDef="let element">
-            {{element[entry.key]}}
-          </td>
-        </ng-container>
-      </ng-container>
+  <table mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8"
+         *ngIf="codebooks$ | async as codebooks">
+    <ng-container matColumnDef="reservationId">
+      <th mat-header-cell *matHeaderCellDef>ID rezervacije</th>
+      <td mat-cell *matCellDef="let element"> {{element.reservationId}} </td>
     </ng-container>
 
-    <tr mat-header-row
-        *matHeaderRowDef="tableKeys"></tr>
-    <tr mat-row
-        *matRowDef="let row; columns: tableKeys;"></tr>
+    <ng-container matColumnDef="clientId">
+      <th mat-header-cell *matHeaderCellDef>ID klijenta</th>
+      <td mat-cell *matCellDef="let element"> {{element.clientId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomId">
+      <th mat-header-cell *matHeaderCellDef>Soba</th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element.roomId | codebook: codebooks['rooms']}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reservationDateFrom">
+      <th mat-header-cell *matHeaderCellDef>Datum pocetka rezervacije</th>
+      <td mat-cell *matCellDef="let element"> {{element.reservationDateFrom | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reservationDateTo">
+      <th mat-header-cell *matHeaderCellDef>Datum kraja rezervacije</th>
+      <td mat-cell *matCellDef="let element"> {{element.reservationDateTo | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reservationStatusId">
+      <th mat-header-cell *matHeaderCellDef>Status rezervacije</th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element.reservationStatusId | codebook: codebooks['reservationStatuses']}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Akcije</th>
+      <td mat-cell
+          *matCellDef="let element">
+        <button (click)="onUpdateEntity(element)"
+                color="primary"
+                mat-mini-fab>
+          <mat-icon>settings</mat-icon>
+        </button>&nbsp;
+        <button (click)="onDeleteEntity(element)"
+                color="primary"
+                mat-mini-fab>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns"
+        mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row></tr>
   </table>
 </div>

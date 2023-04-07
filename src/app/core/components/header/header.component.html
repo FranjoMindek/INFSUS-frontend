@@ -1,29 +1,29 @@
 <mat-toolbar>
   <div class="toolbar-container">
 
-    <button mat-flat-button [routerLink]="['/rooms']">
+    <button [routerLink]="['/rooms']" mat-flat-button>
       <mat-icon>settings</mat-icon>
       <span>Sobe</span>
     </button>
 
-    <button mat-flat-button [routerLink]="['/reservations']">
+    <button [routerLink]="['/reservations']" mat-flat-button>
       <mat-icon>settings</mat-icon>
       <span>Rezervacije</span>
     </button>
 
-    <button mat-flat-button [routerLink]="['/overnight-stays']">
+    <button [routerLink]="['/overnight-stays']" mat-flat-button>
       <mat-icon>settings</mat-icon>
       <span>Noćenja</span>
     </button>
 
-    <button mat-flat-button [routerLink]="['/clients']">
+    <button [routerLink]="['/clients']" mat-flat-button>
       <mat-icon>settings</mat-icon>
       <span>Klijenti</span>
     </button>
 
     <app-auto-open-menu>
-      <button trigger
-              mat-flat-button>
+      <button mat-flat-button
+              trigger>
         <mat-icon>settings</mat-icon>
         <span>Konfiguracija</span>
       </button>
