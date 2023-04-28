@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Uredi kategoriju sobe s ID-jem {{inputData.roomCategoryId}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form"
+        *ngIf="codebooks$ | async as codebooks">
+    <mat-form-field class="full-width">
+      <mat-label>ID Kategorije sobe</mat-label>
+      <input matInput
+             type="text"
+             formControlName="roomCategoryId">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Naziv kategorije sobe</mat-label>
+      <input matInput
+             type="text"
+             formControlName="roomCategoryName">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width" floatLabel="always">
+      <mat-label>Cijena kategorije sobe</mat-label>
+      <input matInput
+             type="number"
+             class="right-align-input"
+             placeholder="0"
+             formControlName="roomCategoryPrice">
+      <span matTextSuffix>.00 €</span>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Kategorija kreveta sobe</mat-label>
+      <mat-select formControlName="roomBedCategoryId">
+        <ng-container>
+          <mat-option *ngFor="let room of codebooks['roomBedCategories']"
+                      [value]="room.id">
+            {{room.name}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Kategorija kvalitete sobe</mat-label>
+      <mat-select formControlName="roomQualityCategoryId">
+        <ng-container>
+          <mat-option *ngFor="let room of codebooks['roomQualityCategories']"
+                      [value]="room.id">
+            {{room.name}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onCancel()" mat-button>Odustani</button>
+  <button (click)="onConfirm()" cdkFocusInitial mat-button>Spremi</button>
+</div>

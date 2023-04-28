@@ -10,8 +10,10 @@ import { ReservationsModule } from './features/reservations/reservations.module'
 import { OvernightStaysModule } from './features/overnight-stays/overnight-stays.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientsModule } from './features/clients/clients.module';
-import { RoomCategoryModule } from './features/configuration/room-category/room-category.module';
-import { RoomQualityModule } from './features/configuration/room-quality/room-quality.module';
+import { RoomCategoriesModule } from './features/configuration/room-categories/room-categories.module';
+import {
+  RoomQualityCategoriesModule,
+} from './features/configuration/room-quality-categories/room-quality-categories.module';
 import { RoomBedCategoriesModule } from './features/configuration/room-bed-categories/room-bed-categories.module';
 
 @NgModule({
@@ -29,8 +31,8 @@ import { RoomBedCategoriesModule } from './features/configuration/room-bed-categ
     ReservationsModule,
     OvernightStaysModule,
     ClientsModule,
-    RoomCategoryModule,
-    RoomQualityModule,
+    RoomCategoriesModule,
+    RoomQualityCategoriesModule,
     RoomBedCategoriesModule,
   ],
   providers: [],

@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   exports: [
     AutoOpenMenuComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

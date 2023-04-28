@@ -44,3 +44,16 @@ input[type=number] {
   width: 100%;
 }
 
+
+.right-align-input {
+  text-align: right;
+}
+
+input.right-align-input::-webkit-outer-spin-button,
+input.right-align-input::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.right-align-input {
+  -moz-appearance: textfield;
+}

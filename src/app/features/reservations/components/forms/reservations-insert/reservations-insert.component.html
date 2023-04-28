@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>Unesi novu rezervaciju</h1>
 <div mat-dialog-content>
-  <form [formGroup]="form" *ngIf="codebooks$ | async as codebooks">
+  <form [formGroup]="form"
+        *ngIf="codebooks$ | async as codebooks">
     <mat-form-field class="full-width">
       <mat-label>OIB klijenta</mat-label>
       <input matInput

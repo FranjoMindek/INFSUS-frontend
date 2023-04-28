@@ -4,12 +4,10 @@
     <mat-form-field class="full-width">
       <mat-label>Soba</mat-label>
       <mat-select formControlName="roomId">
-        <ng-container *ngIf="codebooks$ | async as codebooks">
-          <mat-option *ngFor="let room of codebooks['rooms']"
-                      [value]="room.id">
-            {{room.name}}
-          </mat-option>
-        </ng-container>
+        <mat-option *ngFor="let room of codebooks['rooms']"
+                    [value]="room.id">
+          {{room.name}}
+        </mat-option>
       </mat-select>
       <mat-error>
         Ovo je obavezno polje

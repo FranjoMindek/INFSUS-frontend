@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RoomQualityComponent } from './componnets/room-quality/room-quality.component';
+import { RoomCategoriesComponent } from './componnets/room-categories/room-categories.component';
 
 const routes: Routes = [
   {
-    path: 'room-quality',
-    component: RoomQualityComponent,
+    path: 'room-categories',
+    component: RoomCategoriesComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class RoomQualityRoutingModule {}
+export class RoomCategoriesRoutingModule {}

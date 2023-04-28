@@ -47,6 +47,10 @@ const MY_DATE_FORMAT = {
       provide: MAT_DATE_FORMATS,
       useValue: MY_DATE_FORMAT,
     },
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'de-DE', // 'de-DE' for Germany, 'fr-FR' for France ...
+    // },
   ],
 })
 export class CoreModule {

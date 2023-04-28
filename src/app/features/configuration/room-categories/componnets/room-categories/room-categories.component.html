@@ -1,0 +1,63 @@
+<div>
+  <div class="actions-header">
+    <button mat-raised-button
+            (click)="onInsertEntity()">
+      Dodaj novu kategoriju sobe
+    </button>
+  </div>
+
+  <table mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8"
+         *ngIf="codebooks$ | async as codebooks">
+    <ng-container matColumnDef="roomCategoryId">
+      <th mat-header-cell *matHeaderCellDef>ID Kategorije sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.roomCategoryId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomCategoryName">
+      <th mat-header-cell *matHeaderCellDef>Naziv kategorije sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.roomCategoryName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomCategoryPrice">
+      <th mat-header-cell *matHeaderCellDef>Cijena Kategorije sobe</th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.roomCategoryPrice | currency:'EUR':'symbol':undefined}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomBedCategoryId">
+      <th mat-header-cell *matHeaderCellDef>Naziv Kategorije kreveta</th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.roomBedCategoryId | codebook: codebooks['roomBedCategories']}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomQualityCategoryId">
+      <th mat-header-cell *matHeaderCellDef>Naziv Kategorije kvalitete sobe</th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.roomQualityCategoryId | codebook: codebooks['roomQualityCategories']}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Akcije</th>
+      <td mat-cell
+          *matCellDef="let element">
+        <button (click)="onUpdateEntity(element)"
+                color="primary"
+                mat-mini-fab>
+          <mat-icon>settings</mat-icon>
+        </button>&nbsp;
+        <button (click)="onDeleteEntity(element)"
+                color="primary"
+                mat-mini-fab>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns"
+        mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row></tr>
+  </table>
+</div>
