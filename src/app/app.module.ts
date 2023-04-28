@@ -10,6 +10,9 @@ import { ReservationsModule } from './features/reservations/reservations.module'
 import { OvernightStaysModule } from './features/overnight-stays/overnight-stays.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientsModule } from './features/clients/clients.module';
+import { RoomCategoryModule } from './features/configuration/room-category/room-category.module';
+import { RoomQualityModule } from './features/configuration/room-quality/room-quality.module';
+import { RoomBedCategoriesModule } from './features/configuration/room-bed-categories/room-bed-categories.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { ClientsModule } from './features/clients/clients.module';
     ReservationsModule,
     OvernightStaysModule,
     ClientsModule,
+    RoomCategoryModule,
+    RoomQualityModule,
+    RoomBedCategoriesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

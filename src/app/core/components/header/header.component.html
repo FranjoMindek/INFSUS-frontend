@@ -2,22 +2,22 @@
   <div class="toolbar-container">
 
     <button [routerLink]="['/rooms']" mat-flat-button>
-      <mat-icon>settings</mat-icon>
+      <mat-icon>bed</mat-icon>
       <span>Sobe</span>
     </button>
 
     <button [routerLink]="['/reservations']" mat-flat-button>
-      <mat-icon>settings</mat-icon>
+      <mat-icon>room_service</mat-icon>
       <span>Rezervacije</span>
     </button>
 
     <button [routerLink]="['/overnight-stays']" mat-flat-button>
-      <mat-icon>settings</mat-icon>
+      <mat-icon>bedtime</mat-icon>
       <span>Noćenja</span>
     </button>
 
     <button [routerLink]="['/clients']" mat-flat-button>
-      <mat-icon>settings</mat-icon>
+      <mat-icon>person</mat-icon>
       <span>Klijenti</span>
     </button>
 
@@ -28,17 +28,20 @@
         <span>Konfiguracija</span>
       </button>
       <div content>
-        <button mat-menu-item>
+        <button mat-menu-item
+                [routerLink]="['/room-category']">
           <mat-icon>bed</mat-icon>
           <span>Kategorije kreveta soba</span>
         </button>
-        <button mat-menu-item>
-          <mat-icon>paid</mat-icon>
-          <span>Kategorije kavlitete soba</span>
-        </button>
-        <button mat-menu-item>
+        <button mat-menu-item
+                [routerLink]="['/room-bed-categories']">
           <mat-icon>room_preferences</mat-icon>
           <span>Kategorija soba</span>
+        </button>
+        <button mat-menu-item
+                [routerLink]="['/room-quality']">
+          <mat-icon>paid</mat-icon>
+          <span>Kategorije kavlitete soba</span>
         </button>
       </div>
     </app-auto-open-menu>

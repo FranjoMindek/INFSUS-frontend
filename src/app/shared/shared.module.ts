@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutoOpenMenuComponent } from './components/auto-open-menu/auto-open-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -16,18 +15,12 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AutoOpenMenuComponent,
-    FormDialogComponent,
+    // FormDialogComponent,
     ConfirmDialogComponent,
     // MyTableComponent,
   ],
   exports: [
-    CommonModule,
     AutoOpenMenuComponent,
-    MatMenuModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatInputModule,
-    MatTableModule,
   ],
   imports: [
     CommonModule,

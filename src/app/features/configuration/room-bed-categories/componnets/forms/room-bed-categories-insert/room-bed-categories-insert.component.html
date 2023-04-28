@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Unesi novu rezervaciju</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field class="full-width">
+      <mat-label>ID Kategorije kreveta</mat-label>
+      <input matInput
+             type="text"
+             formControlName="id">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Naziv kategorije kreveta</mat-label>
+      <input matInput
+             type="text"
+             formControlName="name">
+      <mat-error>
+        Ovo je obavezno polje
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onCancel()" mat-button>Odustani</button>
+  <button (click)="onConfirm()" cdkFocusInitial mat-button>Spremi</button>
+</div>

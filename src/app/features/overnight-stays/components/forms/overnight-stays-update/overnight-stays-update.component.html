@@ -5,7 +5,7 @@
       <mat-label>Soba</mat-label>
       <mat-select formControlName="roomId">
         <ng-container *ngIf="codebooks$ | async as codebooks">
-          <mat-option *ngFor="let room of codebooks['rooms']"
+          <mat-option *ngFor="let room of codebooks.rooms"
                       [value]="room.id">
             {{room.name}}
           </mat-option>
@@ -35,7 +35,7 @@
       <mat-label>Status</mat-label>
       <mat-select formControlName="overnightStayStatusId">
         <ng-container>
-          <mat-option *ngFor="let status of codebooks['overnightStayStatuses']"
+          <mat-option *ngFor="let status of codebooks.overnightStayStatuses"
                       [value]="status.id">
             {{status.name}}
           </mat-option>

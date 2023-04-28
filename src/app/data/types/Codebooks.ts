@@ -1,12 +1,9 @@
-export type Codebooks = {
-  [index: string]: CodebookData[]
-}
+export type Codebooks = Record<CodebookNames, CodebookData[]>;
 
 export type CodebookData = {
   id: string,
   name: string
 }
-
 export type CodebookNames = 'clientIds'
                             | 'processes'
                             | 'overnightStayStatuses'

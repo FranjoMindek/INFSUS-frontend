@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, switchMap } from 'rxjs';
@@ -14,6 +14,7 @@ import { OvernightStaysUpdateComponent } from '../forms/overnight-stays-update/o
 @Component({
   selector: 'app-overnight-stays',
   templateUrl: './overnight-stays.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OvernightStaysComponent {
   displayedColumns = [

@@ -70,7 +70,8 @@ export class ReservationsComponent {
       {
         data: {title: `Zelite li obrisati rezervaciju s ID-om ${reservation.reservationId}?`},
         maxWidth: '400px',
-      })
+      },
+    )
         .afterClosed()
         .pipe(
           filter(result => result),
