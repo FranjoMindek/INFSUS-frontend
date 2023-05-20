@@ -1,3 +1,5 @@
+import { ClientInsert } from './Client';
+
 export type OvernightStay = {
   overnightStayId: number,
   clientId: number,
@@ -15,10 +17,7 @@ export type OvernightStayUpdate = {
 }
 
 export type OvernightStayInsert = {
-  clientNationalId: string,
-  clientFirstName: string,
-  clientLastName: string,
-  clientPhoneNumber: number,
+  clientInsert: ClientInsert,
   roomId: number,
   overnightStayDateFrom: Date,
   overnightStayDateTo: Date,

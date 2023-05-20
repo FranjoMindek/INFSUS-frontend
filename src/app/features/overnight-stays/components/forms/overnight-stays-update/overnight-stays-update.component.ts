@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CodebooksService } from '../../../../../data/services/codebooks.service';
-import { OvernightStay } from '../../../../../data/types/OvernightStay';
+import { OvernightStay, OvernightStayUpdate } from '../../../../../data/types/OvernightStay';
 
 @Component({
   selector: 'app-overnight-stays-update',
@@ -21,7 +21,7 @@ export class OvernightStaysUpdateComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<OvernightStaysUpdateComponent>,
+    private dialogRef: MatDialogRef<OvernightStaysUpdateComponent, OvernightStayUpdate>,
     @Inject(MAT_DIALOG_DATA) public inputData: OvernightStay,
     private fb: FormBuilder,
     private codebooksService: CodebooksService,
@@ -31,7 +31,7 @@ export class OvernightStaysUpdateComponent {
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.form.value as OvernightStayUpdate);
   }
 
   onCancel() {
