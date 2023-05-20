@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClientsService } from '../../../../data/services/clients.service';
-import { Client } from '../../../../data/types/Client';
+import { Client, ClientUpdate } from '../../../../data/types/Client';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, switchMap } from 'rxjs';
 import { CodebooksService } from '../../../../data/services/codebooks.service';
@@ -15,7 +15,6 @@ export class ClientsComponent {
   displayedColumns = [
     'clientId', 'clientNationalId', 'clientPhoneNumber', 'clientFirstName', 'clientLastName', 'actions',
   ];
-
 
   clients$ = this.clientService.getClients();
   dataSource = new MatTableDataSource<Client>([]);
@@ -31,7 +30,7 @@ export class ClientsComponent {
   }
 
   onUpdateEntity(client: Client): void {
-    this.dialog.open<ClientsUpdateComponent, Client, Client | undefined>(
+    this.dialog.open<ClientsUpdateComponent, Client, ClientUpdate | undefined>(
       ClientsUpdateComponent,
       {
         data: client,

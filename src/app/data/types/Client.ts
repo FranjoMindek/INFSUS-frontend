@@ -6,6 +6,13 @@ export type Client = {
   clientLastName: string
 }
 
+export type ClientInsert = {
+  clientNationalId: string,
+  clientPhoneNumber: string,
+  clientFirstName: string,
+  clientLastName: string
+}
+
 export type ClientUpdate = {
   clientId: number,
   clientFirstName: string,
