@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RoomsService } from '../../../../data/services/rooms.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { RoomsDetailed } from '../../../../data/types/RoomsDetailed';
+import { RoomsDetailed } from '../../../../data/types/Room';
 import { DataType, FormActions } from '../../../../data/types/FormDialogData';
 import { Reservation } from '../../../../data/types/Reservation';
 import { MatDialog } from '@angular/material/dialog';
