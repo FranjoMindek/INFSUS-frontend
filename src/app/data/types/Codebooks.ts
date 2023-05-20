@@ -25,3 +25,8 @@ export type CodebookNames = 'clientIds'
 //   'roomQualityCategories',
 //   'roomBedCategories',
 // }
+
+export type RoomBedCategory = CodebookData;
+export type RoomQualityCategory = CodebookData;
+export type RoomStatus = CodebookData;
+export type Process = CodebookData;

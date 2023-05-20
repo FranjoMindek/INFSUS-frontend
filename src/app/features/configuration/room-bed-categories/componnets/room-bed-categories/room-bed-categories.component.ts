@@ -3,7 +3,7 @@ import { RoomBedCategoriesService } from '../../../../../data/services/room-bed-
 import { CodebooksService } from '../../../../../data/services/codebooks.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { CodebookData } from '../../../../../data/types/Codebooks';
+import { RoomBedCategory } from '../../../../../data/types/Codebooks';
 import { filter, switchMap } from 'rxjs';
 import {
   RoomBedCategoriesInsertComponent,
@@ -21,7 +21,7 @@ export class RoomBedCategoriesComponent {
     'id', 'name', 'actions',
   ];
   codebooks$ = this.codebookService.getCodebooks('roomBedCategories');
-  dataSource: MatTableDataSource<CodebookData> = new MatTableDataSource<CodebookData>([]);
+  dataSource: MatTableDataSource<RoomBedCategory> = new MatTableDataSource<RoomBedCategory>([]);
 
   constructor(
     private roomBedCategoriesService: RoomBedCategoriesService,
@@ -34,7 +34,7 @@ export class RoomBedCategoriesComponent {
   }
 
   onInsertEntity() {
-    this.dialog.open<RoomBedCategoriesInsertComponent, null, CodebookData | undefined>(
+    this.dialog.open<RoomBedCategoriesInsertComponent, null, RoomBedCategory | undefined>(
       RoomBedCategoriesInsertComponent,
       {
         maxWidth: '400px',
@@ -49,7 +49,7 @@ export class RoomBedCategoriesComponent {
         .subscribe(roomBedCategories => this.dataSource.data = roomBedCategories.roomBedCategories);
   }
 
-  onDeleteEntity(roomBedCategory: CodebookData) {
+  onDeleteEntity(roomBedCategory: RoomBedCategory) {
     this.dialog.open<ConfirmDialogComponent, {title: string}, any>(
       ConfirmDialogComponent,
       {

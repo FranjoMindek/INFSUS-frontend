@@ -24,14 +24,14 @@ export class RoomCategoriesUpdateComponent {
   constructor(
     private codebooksService: CodebooksService,
     @Inject(MAT_DIALOG_DATA) public inputData: RoomCategory,
-    private dialogRef: MatDialogRef<RoomCategoriesUpdateComponent>,
+    private dialogRef: MatDialogRef<RoomCategoriesUpdateComponent, RoomCategory>,
     private fb: FormBuilder,
   ) {}
 
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.form.value as RoomCategory);
   }
 
   onCancel() {

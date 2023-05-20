@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CodebooksService } from '../../../../../../data/services/codebooks.service';
+import { RoomCategory } from '../../../../../../data/types/RoomCategory';
 
 @Component({
   selector: 'app-room-categories-insert',
@@ -22,14 +23,14 @@ export class RoomCategoriesInsertComponent {
 
   constructor(
     private codebooksService: CodebooksService,
-    private dialogRef: MatDialogRef<RoomCategoriesInsertComponent>,
+    private dialogRef: MatDialogRef<RoomCategoriesInsertComponent, RoomCategory>,
     private fb: FormBuilder,
   ) {}
 
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.form.value as RoomCategory);
   }
 
   onCancel() {

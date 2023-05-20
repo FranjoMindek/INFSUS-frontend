@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { CodebookData } from '../../../../../data/types/Codebooks';
+import { RoomQualityCategory } from '../../../../../data/types/Codebooks';
 import { CodebooksService } from '../../../../../data/services/codebooks.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -21,7 +21,7 @@ export class RoomQualityCategoriesComponent {
     'id', 'name', 'actions',
   ];
   codebooks$ = this.codebookService.getCodebooks('roomQualityCategories');
-  dataSource: MatTableDataSource<CodebookData> = new MatTableDataSource<CodebookData>([]);
+  dataSource: MatTableDataSource<RoomQualityCategory> = new MatTableDataSource<RoomQualityCategory>([]);
 
   constructor(
     private roomQualityCategoriesService: RoomQualityCategoriesService,
@@ -34,7 +34,7 @@ export class RoomQualityCategoriesComponent {
   }
 
   onInsertEntity() {
-    this.dialog.open<RoomBedCategoriesInsertComponent, null, CodebookData | undefined>(
+    this.dialog.open<RoomBedCategoriesInsertComponent, null, RoomQualityCategory | undefined>(
       RoomBedCategoriesInsertComponent,
       {
         maxWidth: '400px',
@@ -49,7 +49,7 @@ export class RoomQualityCategoriesComponent {
         .subscribe(codebooks => this.dataSource.data = codebooks.roomQualityCategories);
   }
 
-  onDeleteEntity(roomQualityCategory: CodebookData) {
+  onDeleteEntity(roomQualityCategory: RoomQualityCategory) {
     this.dialog.open<ConfirmDialogComponent, {title: string}, any>(
       ConfirmDialogComponent,
       {
