@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CodebooksService } from '../../../../../data/services/codebooks.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Reservation } from '../../../../../data/types/Reservation';
+import { Reservation, ReservationUpdate } from '../../../../../data/types/Reservation';
 
 @Component({
   selector: 'app-reservations-update-form',
@@ -20,7 +20,7 @@ export class ReservationsUpdateComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<ReservationsUpdateComponent>,
+    private dialogRef: MatDialogRef<ReservationsUpdateComponent, ReservationUpdate>,
     @Inject(MAT_DIALOG_DATA) public inputData: Reservation,
     private fb: FormBuilder,
     private codebooksService: CodebooksService,
@@ -30,7 +30,7 @@ export class ReservationsUpdateComponent {
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.form.value as ReservationUpdate);
   }
 
   onCancel() {

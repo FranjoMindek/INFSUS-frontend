@@ -1,3 +1,5 @@
+import { ClientInsert } from './Client';
+
 export type Reservation = {
   reservationId: number,
   clientId: number,
@@ -15,10 +17,7 @@ export type ReservationUpdate = {
 }
 
 export type ReservationInsert = {
-  clientNationalId: string,
-  clientFirstName: string,
-  clientLastName: string,
-  clientPhoneNumber: number,
+  clientInsert: ClientInsert,
   roomId: number,
   reservationDateFrom: Date,
   reservationDateTo: Date,
