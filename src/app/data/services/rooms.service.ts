@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/ApiService';
-import { Room } from '../types/Room';
-import { RoomsDetailed } from '../types/RoomsDetailed';
+import { Room, RoomsDetailed } from '../types/Room';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +10,12 @@ export class RoomsService {
   constructor(private api: ApiService) {
   }
 
-  getRoomsDetailed() {
-    return this.api.get<RoomsDetailed[]>(`/rooms`);
+  getDetailedRooms() {
+    return this.api.get<RoomsDetailed[]>(`/detailed-rooms`);
   }
 
-  getRoomDetailedById(roomId: number | string) {
-    return this.api.get<RoomsDetailed>(`/rooms/${roomId}`);
+  getDetailedRoomsById(roomId: number | string) {
+    return this.api.get<RoomsDetailed>(`/detailed-rooms/${roomId}`);
   }
 
   insertRoom(room: Room) {

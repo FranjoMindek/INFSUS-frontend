@@ -3,7 +3,20 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { RoomsRoutingModule } from './rooms-routing.module';
-import { DatePipe, KeyValuePipe, NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import {
+  AsyncPipe,
+  CurrencyPipe,
+  DatePipe,
+  KeyValuePipe,
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
+import { CodebookPipe } from '../../shared/pipes/codebook.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -20,6 +33,12 @@ import { DatePipe, KeyValuePipe, NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefaul
     NgSwitchDefault,
     NgForOf,
     KeyValuePipe,
+    AsyncPipe,
+    CodebookPipe,
+    MatButtonModule,
+    MatIconModule,
+    NgIf,
+    CurrencyPipe,
   ],
 })
 export class RoomsModule {

@@ -1,30 +1,61 @@
 <div>
-  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
-
-    <ng-container *ngFor="let entry of tableInfo | keyvalue" matColumnDef="{{entry.key}}">
-      <th *matHeaderCellDef
-          mat-header-cell>
-        {{entry.value.name}}
-      </th>
-      <ng-container [ngSwitch]="entry.value.type">
-        <ng-container *ngSwitchCase="dataType.DATE">
-          <td *matCellDef="let element"
-              mat-cell>
-            {{element[entry.key] | date}}
-          </td>
-        </ng-container>
-        <ng-container *ngSwitchDefault>
-          <td *matCellDef="let element"
-              mat-cell>
-            {{element[entry.key]}}
-          </td>
-        </ng-container>
-      </ng-container>
+  <table mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8"
+         *ngIf="codebooks$ | async as codebooks">
+    <ng-container matColumnDef="roomId">
+      <th mat-header-cell *matHeaderCellDef>ID sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.room.roomId}} </td>
     </ng-container>
 
-    <tr *matHeaderRowDef="tableKeys"
+    <ng-container matColumnDef="roomCode">
+      <th mat-header-cell *matHeaderCellDef>Šifra sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.room.roomCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomFloor">
+      <th mat-header-cell *matHeaderCellDef>Kat sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.room.roomFloor}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomStatusId">
+      <th mat-header-cell *matHeaderCellDef>Status sobe</th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element.room.roomStatusId | codebook: codebooks['roomStatuses']}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomCategoryName">
+      <th mat-header-cell *matHeaderCellDef>Kategorija sobe</th>
+      <td mat-cell *matCellDef="let element"> {{element.roomCategory.roomCategoryName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomCategoryPrice">
+      <th mat-header-cell *matHeaderCellDef>Cijena sobe</th>
+      <td mat-cell
+          *matCellDef="let element"> {{element.roomCategory.roomCategoryPrice | currency:'EUR':'symbol':undefined}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomBedCategoryId">
+      <th mat-header-cell *matHeaderCellDef>Kategorija kreveta sobe</th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element.roomCategory.roomBedCategoryId | codebook: codebooks['roomBedCategories']}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomQualityCategoryId">
+      <th mat-header-cell *matHeaderCellDef>Kategorija kvalitete sobe</th>
+      <td mat-cell
+          *matCellDef="let element">
+        {{element.roomCategory.roomQualityCategoryId | codebook: codebooks['roomQualityCategories']}}
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns"
         mat-header-row></tr>
-    <tr *matRowDef="let row; columns: tableKeys;"
+    <tr *matRowDef="let row; columns: displayedColumns;"
         mat-row></tr>
   </table>
 </div>
