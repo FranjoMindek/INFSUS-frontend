@@ -10,6 +10,7 @@ import { OvernightStay, OvernightStayInsert, OvernightStayUpdate } from '../../.
 import { OvernightStaysService } from '../../../../data/services/overnight-stays.service';
 import { OvernightStaysInsertComponent } from '../forms/overnight-stays-insert/overnight-stays-insert.component';
 import { OvernightStaysUpdateComponent } from '../forms/overnight-stays-update/overnight-stays-update.component';
+import { CodebookData } from '../../../../data/types/Codebooks';
 
 @Component({
   selector: 'app-overnight-stays',
@@ -25,6 +26,7 @@ export class OvernightStaysComponent {
   overnightStays$ = this.overnightStaysService.getOvernightStays();
   codebooks$ = this.codebookService.getCodebooks('rooms', 'overnightStayStatuses');
   dataSource: MatTableDataSource<OvernightStay> = new MatTableDataSource<OvernightStay>([]);
+  statuses: CodebookData[] | undefined = undefined;
 
   constructor(
     private overnightStaysService: OvernightStaysService,
@@ -34,6 +36,36 @@ export class OvernightStaysComponent {
     this.overnightStays$.subscribe(overnightStays =>
       this.dataSource.data = overnightStays,
     );
+    this.codebooks$.subscribe(value => {
+      this.statuses = value.overnightStayStatuses;
+    });
+    this.dataSource.filterPredicate = (record, filter) => {
+      let dataStr = '';
+      dataStr += record.overnightStayId;
+      dataStr += '◬';
+      dataStr += record.clientId;
+      dataStr += '◬';
+      dataStr += record.roomId;
+      dataStr += '◬';
+      dataStr += new Date(record.overnightStayDateFrom!).toLocaleDateString();
+      dataStr += '◬';
+      dataStr += new Date(record.overnightStayDateTo!).toLocaleDateString();
+      dataStr += '◬';
+      if (this.statuses) {
+        dataStr += this.statuses.filter(value => value.id === record.overnightStayStatusId)[0].name;
+      }
+      dataStr = dataStr.toLowerCase();
+
+      const transformedFilter = filter.trim()
+                                      .toLowerCase();
+      return dataStr.indexOf(transformedFilter) != -1;
+    };
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim()
+                                        .toLowerCase();
   }
 
   onInsertEntity(): void {

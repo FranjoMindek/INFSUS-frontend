@@ -6,7 +6,7 @@ export type OvernightStay = {
   roomId: number,
   overnightStayDateFrom?: Date,
   overnightStayDateTo?: Date,
-  overnightStayStatusId?: number
+  overnightStayStatusId?: string
 }
 
 export type OvernightStayUpdate = {

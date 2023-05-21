@@ -27,7 +27,10 @@
       <input matInput
              type="text"
              formControlName="clientPhoneNumber">
-      <mat-error>
+      <mat-error *ngIf="this.form.controls.clientPhoneNumber.hasError('pattern')">
+        Nije ispravan unos broja mobitela
+      </mat-error>
+      <mat-error *ngIf="this.form.controls.clientPhoneNumber.hasError('required')">
         Ovo je obavezno polje
       </mat-error>
     </mat-form-field>

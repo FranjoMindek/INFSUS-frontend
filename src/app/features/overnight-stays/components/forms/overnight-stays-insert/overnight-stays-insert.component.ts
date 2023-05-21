@@ -21,7 +21,11 @@ export class OvernightStaysInsertComponent {
       clientNationalId: ['', Validators.required],
       clientFirstName: [''],
       clientLastName: [''],
-      clientPhoneNumber: ['', Validators.required],
+      clientPhoneNumber: ['', [
+        Validators.required, Validators.pattern(
+          '(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})'),
+      ],
+      ],
     }),
     roomId: [undefined, Validators.required],
     overnightStayDateFrom: [new Date(), Validators.required],

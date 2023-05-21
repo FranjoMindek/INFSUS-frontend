@@ -1,45 +1,50 @@
 <h1 mat-dialog-title>Unesi novo nocenje</h1>
 <div mat-dialog-content>
   <form [formGroup]="form" *ngIf="codebooks$ | async as codebooks">
-    <mat-form-field class="full-width">
-      <mat-label>OIB klijenta</mat-label>
-      <input matInput
-             type="text"
-             formControlName="clientNationalId">
-      <mat-error>
-        Ovo je obavezno polje
-      </mat-error>
-    </mat-form-field>
+    <ng-container [formGroup]="form.controls.clientInsert">
+      <mat-form-field class="full-width">
+        <mat-label>OIB klijenta</mat-label>
+        <input matInput
+               type="text"
+               formControlName="clientNationalId">
+        <mat-error>
+          Ovo je obavezno polje
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Ime klijenta</mat-label>
-      <input matInput
-             type="text"
-             formControlName="clientFirstName">
-      <mat-error>
+      <mat-form-field class="full-width">
+        <mat-label>Ime klijenta</mat-label>
+        <input matInput
+               type="text"
+               formControlName="clientFirstName">
+        <mat-error>
 
-      </mat-error>
-    </mat-form-field>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Prezime klijenta</mat-label>
-      <input matInput
-             type="text"
-             formControlName="clientLastName">
-      <mat-error>
+      <mat-form-field class="full-width">
+        <mat-label>Prezime klijenta</mat-label>
+        <input matInput
+               type="text"
+               formControlName="clientLastName">
+        <mat-error>
 
-      </mat-error>
-    </mat-form-field>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Broj mobitela</mat-label>
-      <input matInput
-             type="text"
-             formControlName="clientPhoneNumber">
-      <mat-error>
-        Ovo je obavezno polje
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Broj mobitela</mat-label>
+        <input matInput
+               type="text"
+               formControlName="clientPhoneNumber">
+        <mat-error *ngIf="this.form.controls.clientInsert.controls.clientPhoneNumber.hasError('pattern')">
+          Nije ispravan unos broja mobitela
+        </mat-error>
+        <mat-error *ngIf="this.form.controls.clientInsert.controls.clientPhoneNumber.hasError('required')">
+          Ovo je obavezno polje
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
 
     <mat-form-field class="full-width">
       <mat-label>Soba</mat-label>
