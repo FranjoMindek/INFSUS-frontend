@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CodebooksService } from '../../../../../../data/services/codebooks.service';
 import { RoomCategory } from '../../../../../../data/types/RoomCategory';
+import { FormType } from '../../../../../../data/types/UtilityTypes';
 
 @Component({
   selector: 'app-room-categories-insert',
@@ -13,12 +14,12 @@ export class RoomCategoriesInsertComponent {
 
   codebooks$ = this.codebooksService.getCodebooks('roomBedCategories', 'roomQualityCategories');
 
-  form = this.fb.group({
-    roomCategoryId: ['', Validators.required],
-    roomCategoryName: ['', Validators.required],
-    roomCategoryPrice: ['', Validators.required],
-    roomBedCategoryId: ['', Validators.required],
-    roomQualityCategoryId: ['', Validators.required],
+  form: FormType<RoomCategory> = this.fb.group({
+    roomCategoryId: new FormControl<string | null>(null, Validators.required),
+    roomCategoryName: new FormControl<string | null>(null, Validators.required),
+    roomCategoryPrice: new FormControl<number | null>(null, Validators.required),
+    roomBedCategoryId: new FormControl<string | null>(null, Validators.required),
+    roomQualityCategoryId: new FormControl<string | null>(null, Validators.required),
   });
 
   constructor(

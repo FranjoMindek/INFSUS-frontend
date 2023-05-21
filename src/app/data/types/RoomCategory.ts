@@ -4,4 +4,4 @@ export type RoomCategory = {
   roomCategoryPrice: number,
   roomBedCategoryId: string,
   roomQualityCategoryId: string
-}
+};

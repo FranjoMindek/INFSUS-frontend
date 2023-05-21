@@ -30,7 +30,7 @@ export class ReservationsUpdateComponent {
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value as ReservationUpdate);
+    this.dialogRef.close(this.form.value as unknown as ReservationUpdate);
   }
 
   onCancel() {

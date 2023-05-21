@@ -53,7 +53,7 @@ export class OvernightStaysInsertComponent {
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value as OvernightStayInsert);
+    this.dialogRef.close(this.form.value as unknown as OvernightStayInsert);
   }
 
   onCancel() {

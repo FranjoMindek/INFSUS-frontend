@@ -14,7 +14,13 @@ export class RoomCategoriesUpdateComponent {
   codebooks$ = this.codebooksService.getCodebooks('roomBedCategories', 'roomQualityCategories');
 
   form = this.fb.group({
-    roomCategoryId: [this.inputData.roomCategoryId, Validators.required],
+    roomCategoryId: [
+      {
+        value: this.inputData.roomCategoryId,
+        disabled: true,
+      },
+      Validators.required,
+    ],
     roomCategoryName: [this.inputData.roomCategoryName, Validators.required],
     roomCategoryPrice: [this.inputData.roomCategoryPrice, Validators.required],
     roomBedCategoryId: [this.inputData.roomBedCategoryId, Validators.required],

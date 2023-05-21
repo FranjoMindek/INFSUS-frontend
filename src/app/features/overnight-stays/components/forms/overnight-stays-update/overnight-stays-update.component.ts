@@ -31,7 +31,7 @@ export class OvernightStaysUpdateComponent {
   onConfirm() {
     if (!this.form.valid) return;
 
-    this.dialogRef.close(this.form.value as OvernightStayUpdate);
+    this.dialogRef.close(this.form.value as unknown as OvernightStayUpdate);
   }
 
   onCancel() {
